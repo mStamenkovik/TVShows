@@ -1,0 +1,214 @@
+<style>
+.carousel-inner.onebyone-carosel { margin: auto; width: 100%; }
+.onebyone-carosel .active.left { left: -33.33%; }
+.onebyone-carosel .active.right { left: 33.33%; }
+.onebyone-carosel .next { left: 33.33%; }
+.onebyone-carosel .prev { left: -33.33%; }
+
+.hidden-part{
+  display: none;
+}
+</style>
+
+ <div class="jumbotron jumbo-space">
+    <div class="row"> <!-- show info  -->
+       <div class="row top-brown">
+           <div class="container">
+	               <div class="col-md-6 show-name">
+	                 <h2 class="georgia">{{ result.name }}</h2>
+	               </div>
+	               <div class="col-md-6">
+	                  <a class="show-home-link show-home-link-pos" target="_blank" href="{{ result.homepage }}">
+	                        <h4>{{ result.name }}'s</h4><h4> Homepage</h4>
+	                   </a>
+	               </div>
+              </div>
+       </div> <!--  end top brown row -->
+       <div class="row middle-yellow">
+          <div class="container">
+             <div class="col-md-6">
+               <img src="http://image.tmdb.org/t/p/w500{{ result.poster_path }}" alt="{{ result.name }}"
+                            class="img-responsive" style="margin-bottom: 0px; max-width: 90%">
+             </div>
+             <div class="col-md-6">
+               <div class="row">
+                          <p class="overview-text">{{ result.overview }}</p>
+                    </div>
+                    <div class="row">             
+			            <div class="col-md-4">
+			                           <h4 class="show-name">Genres:</h4>
+			            <div class="text-color-dark" ng-repeat="genre in result.genres">{{ genre.name }}</div>
+			            </div>			            
+			            <div class="col-md-4">
+			                           <h4 class="show-name">Production:</h4>
+			            <div class="text-color-dark" ng-repeat="prod in result.production_companies">{{ prod.name }}</div>
+			            </div>			            
+			            <div class="col-md-4">
+			                           <h4 class="show-name">Networks:</h4>
+			            <div class="text-color-dark" ng-repeat="network in result.networks">{{ network.name }}</div>
+			            </div>			            
+			            <!-- <div class="col-md-3">
+			                           <h4 class="fontColorMain">Genres:</h4>
+			            <div class="fontColorText" ng-repeat="genre in show.genres">{{ genre.name }}
+			            </div> -->                 
+                    </div>
+                    <div class="row top-buffer">
+                          <div class="col-md-4">
+                             <div class="row">
+                                 <h4 class="show-name">Rating</h4>
+                             </div>
+             <!--   /////////////    stars for rating;; write js     -->         
+                             <div class="row"> 
+                                 <img style="margin-top: 17px" src="images/rating-stars-dark.png" alt="rating-stars" 
+                                    class="img-responsive">
+                             </div>
+                            
+                             <div class="row">
+                                 <span class="text-color-dark" ng-show="numOfRec > 0">Recomended by: {{ numOfRec }}</span><br>
+                                 <span class="text-color-dark">{{ result.vote_average }} from {{ result.vote_count}} users</span>
+                             </div>
+                          </div>
+                          <div class="col-md-4">
+                              <h4 class="show-name">Runtime</h4>
+                              <div class="row vcenter">
+                                  <img src="images/clock3.png" alt="runtime" class="img-responsive" style="display: inline">
+                                  <span class="text-color-dark">{{ result.episode_run_time }} mins</span>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <h4 class="show-name">Seasons</h4>
+                              <div class="row">
+                                  <img src="images/clapper1.png" alt="seasons" class="img-responsive" style="display: inline">
+                                  <span class="text-color-dark">{{ result.number_of_seasons }}</span>
+                              </div>
+                          </div>
+                    </div>
+                    <div class="row top-buffer" style="margin-bottom: 20px">
+                      <div ng-show="loggedIn">
+	                   <div ng-show="!recommendedByUser"> <span class="glyphicon glyphicon-thumbs-up"></span> 
+	                             <a href="" class="show-home-link" ng-click="recomend(result)">Recommend</a> </div>
+	                    <div ng-show="recommendedByUser">  <span class="glyphicon glyphicon-thumbs-down"></span>
+	                             <a href="" class="show-home-link" ng-click="unRecomend(result)">Unrecommend</a> </div>
+	                    <div ng-show="!addedToWatchlist" class="row">
+		                       <button class="btn btn-watchlist"  ng-click="addToWatchlist(result)">
+		                       <i class="glyphicon glyphicon-plus"></i> Add to watchlist</button>  
+                       </div>  
+                       <div ng-show="addedToWatchlist" class="row">
+	                       <button class="btn btn-watchlist "  ng-click="removeFromWatchlist(result)">
+	                       <i class="glyphicon glyphicon-minus"></i>Remove from watchlist</button>  
+                       </div>
+                          </div>
+                    </div>
+             </div>           
+          </div>
+       </div>
+    <div class="row top-brown" style="height: 50px"><!--  dark brown -->     
+          </div>
+      <div class="row" style="height: 20px; background-color: #591E23"><!-- pink dark -->   
+          </div>
+          <div class="row top-brown" style="height: 10px; background-color: #D94E67"><!-- pink -->   
+     </div> <!--end bottom brown-->
+ </div> <!--end show info-->
+ 
+    <div class="jumbotron jumbo-space"> <!-- show trailer-->
+      <div class="row middle-yellow">
+           <div ng-class="{'videowrapper' : videos.results[0].key}">
+                  <div ng-show="videos.results[0].key" my-youtube code="videos.results[0].key"></div> 
+                  <div ng-show="!videos.results[0].key"><h2 class="text-center">No video available</h2></div>
+           </div>
+           
+      </div>     
+    </div> <!--end show trailer-->
+      <div class="row top-brown" style="height: 30px"><!-- bottom brown  -->  
+          </div>
+      <div class="row" style="height: 20px; background-color: #591E23"><!-- bottom brown    -->
+          </div>
+          <div class="row top-brown" style="height: 10px; background-color: #D94E67"><!-- bottom brown    -->
+          </div> <!--end bottom brown -->
+          
+    <!-- start characters  -->
+    <div class="jumbotron middle-yellow jumbo-space">
+        <div class="container">
+            <h2 class="show-name">Credits</h2>
+            <div class="row">
+            <h3 class="show-name">Created By</h3>
+              <div class="col-md-3" style="margin-top: 20px" ng-repeat="created_by in result.created_by">
+                  <div class="col-md-6">
+                     <img src="http://image.tmdb.org/t/p/w500{{ created_by.profile_path }}" alt="{{ created_by.name }}"
+                            class="img-responsive" style="height: 146px; width: 100px">
+                  </div>
+                  <div class="col-md-6">
+                      {{ created_by.name }}
+                  </div>
+              </div>
+            </div>
+            <div ng-show="credits.crew.length">
+            <hr style="border-color: #591E23">
+              <h3 class="show-name">Crew</h3>
+              <div  class="row">
+              <div class="col-md-3" style="margin-top: 20px" ng-repeat="crew in credits.crew">
+                  <div class="col-md-6">
+                     <img src="http://image.tmdb.org/t/p/w500{{ crew.profile_path }}" alt="{{ crew.name }}"
+                            class="img-responsive" style="height: 146px; width: 100px">
+                  </div>
+                  <div class="col-md-6">
+                      <h4 class="show-name">{{ crew.job }}</h4>
+                      <h5>{{ crew.name }}</h5>
+                  </div>
+              </div>
+            </div>
+            </div>
+            <hr style="border-color: #591E23">
+            <h3 class="show-name">Cast</h3>
+              <div class="row">
+            
+              <div class="col-md-3" style="margin-top: 20px; margin-bottom: 20px" ng-repeat="actor in credits.cast">
+                  <div class="col-md-6">
+                     <img src="http://image.tmdb.org/t/p/w500{{ actor.profile_path }}" alt="{{ actor.name }}"
+                            class="img-responsive" style="height: 146px; width: 100px" >
+                  </div>
+                  <div class="col-md-6">
+                      <h4 class="show-name">{{ actor.name }}</h4>
+                      <h5>as {{ actor.character }}</h5>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <!-- end characters  -->
+    <div class="row top-brown" style="height: 30px"><!--  bottom brown     -->
+          </div>
+      <div class="row" style="height: 20px; background-color: #591E23"> <!-- bottom brown     -->
+          </div>
+          <div class="row top-brown" style="height: 10px; background-color: #D94E67"> <!-- bottom brown    --> 
+          </div>
+           
+          
+    <div class="jumbotron jumbo-space">
+      <div class="row middle-yellow">
+        <div class="container">
+           <div ng-repeat="season in result.seasons">
+           <div class="col-md-2">
+			  <div class="row row-eq-height">	 
+			      <a href="#/tvshow/{{ result.id }}/season/{{ season.season_number }}"> 
+			        <img ng-src="http://image.tmdb.org/t/p/w500{{ season.poster_path }}" 
+			            class="img-responsive thumbnail img-offset" style="width: 220px; height: 240px"></img>
+			         </a>
+	          </div>
+         </div>
+</div>
+      
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

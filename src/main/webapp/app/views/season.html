@@ -1,0 +1,113 @@
+ <style>
+ #leftMenu .accordion-group {
+    margin-bottom: 0px;
+    border:0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}    
+
+#leftMenu .accordion-heading {
+    height: 34px;
+    border-top: 1px solid #717171; /* inner stroke */
+    border-bottom: 1px solid #453024; /* inner stroke */
+    background-color: #73503C; /* layer fill content */
+/*     background-image: -moz-linear-gradient(90deg, #595b59 0%, #616161 100%); /* gradient overlay */
+/*    background-image: -o-linear-gradient(90deg, #595b59 0%, #616161 100%); /* gradient overlay */
+  /*  background-image: -webkit-linear-gradient(90deg, #595b59 0%, #616161 100%); /* gradient overlay */
+    /*background-image: linear-gradient(90deg, #A68572 100%, #A68572 100%); /* gradient overlay */ 
+    
+    list-style-type:none;
+}  
+
+#leftMenu .accordion-heading  a{  
+    color: #D94E67; /* text color */
+    text-shadow: 0 1px 0 #3b3b3b; /* drop shadow */
+    text-decoration:none;
+    font-weight:bold;  
+    
+}
+
+#leftMenu .accordion-heading  a:hover{  
+    color:#591E23    
+}
+
+#leftMenu .accordion-heading .active {
+    width: 182px;
+    height: 34px;
+    border: 1px solid #5b5b5b; /* inner stroke */
+    background-color: #353535; /* layer fill content */
+    background-image: -moz-linear-gradient(90deg, #4b4b4b 0%, #555 100%); /* gradient overlay */
+    background-image: -o-linear-gradient(90deg, #4b4b4b 0%, #555 100%); /* gradient overlay */
+    background-image: -webkit-linear-gradient(90deg, #4b4b4b 0%, #555 100%); /* gradient overlay */
+    background-image: linear-gradient(90deg, #4b4b4b 0%, #555 100%); /* gradient overlay */
+}
+
+.text-fix {
+   font-size: 18px;
+}
+
+ </style>
+ <div class="row top-brown">
+	   <div class="container">
+	     <h2 ng-show="!result.season_number" class="show-name georgia">{{ tvShow.name }}, Specials</h2>
+	     <h2 ng-show="result.season_number" class="show-name georgia">{{ tvShow.name }}, Season {{ result.season_number }}</h2>
+	   </div>
+	</div>
+	<div class="row middle-yellow">  <!-- middle yellow -->
+             <div class="container">
+                 <div class="col-md-6">
+                     <img src="http://image.tmdb.org/t/p/w500{{ result.poster_path }}" alt="{{ result.name }}"
+                            class="img-responsive thumbnail" style="margin-bottom: 0px; max-width: 80%">
+                 </div>
+                 <div class="col-md-6">
+                     <div class="row">
+                          <p class="overview-text">{{ result.overview }}</p>
+                    </div>
+                    <div class="row">
+                          <span class="show-name text-fix">Air date: </span><span> {{ result.air_date }} </span>
+                    </div>
+                    <div class="row" style="margin-top: 5px;">
+                          <span class="show-name text-fix">Number of episodes: </span><span> {{ result.episodes.length }} </span>
+                    </div>
+                 </div>
+             </div>
+    </div>
+    <div class="row top-brown" style="height: 30px"> <!-- bottom brown -->    
+          </div>
+      <div class="row" style="height: 20px; background-color: #591E23"> <!-- bottom brown -->    
+          </div>
+          <div class="row top-brown" style="height: 10px; background-color: #D94E67"> <!-- bottom brown -->    
+          </div>
+   <div class="row middle-yellow">
+     <div class="container">
+       <h2 class="show-name">Episodes</h2>
+        <div class="accordion" id="leftMenu" style="margin-bottom: 20px">
+                    <div ng-repeat="episode in result.episodes" class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" data-target="#collapse{{episode.episode_number}}">
+                                <i class="icon-th"></i> <h4 style="padding-left: 5px;">{{ episode.name }}</h4>
+                            </a>
+                        </div>
+                        <div id="collapse{{episode.episode_number}}" class="accordion-body collapse" style="height: 0px; ">
+                            <div class="accordion-inner">
+                                <div>
+                                    <h4 class="show-name">Overview</h4>
+                                    <p> {{ episode.overview }}</p>
+                                    <div style="display: block">
+                                      <span class="show-name text-fix">Air date: </span><span> {{ episode.air_date }} </span>
+                                    </div>
+                                    <div style="display: block">
+                                      <span class="show-name text-fix">Episode number: </span><span> {{ episode.episode_number }} </span>
+                                    </div>
+                                    <div style="display: block">
+                                      <span class="show-name text-fix">Guest stars: </span>
+                                           <span ng-repeat="guest in episode.guest_stars"> {{ guest.name }}&nbsp&nbsp </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+    </div>            

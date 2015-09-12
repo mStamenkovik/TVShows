@@ -1,0 +1,62 @@
+
+<div ng-show="result.results[0]">
+<div class="top-brown" >
+<div class="container middle-yellow" >
+<div ng-repeat="tvShow in result.results" class="list-unstyled">
+		<div class="col-md-4">
+		<div class="styled-border block-back">
+		  <div class="row row-eq-height">
+		    <div class="col-md-6">
+		      <a href="#/tvshow/{{ tvShow.id }}"> <img ng-src="http://image.tmdb.org/t/p/w500{{ tvShow.poster_path }}" 
+		            class="img-responsive thumbnail img-offset" style="width: 220px; height: 240px"></img>
+		         </a>
+		   </div>
+		   <div class="col-md-6">
+				  <div>
+					  
+					  <h4 ng-show="tvShow.original_name.length > 24" class="show-name">{{ tvShow.original_name }}</h4>
+					  
+					  <h3 ng-show="tvShow.original_name.length <= 24" class="show-name">{{ tvShow.original_name }}</h3>
+					  
+				      <p>Popularity: {{ tvShow.popularity }}</p>
+				      <p>Average vote: {{ tvShow.vote_average }}</p>
+                      <p ng-show="tvShow.numOfRec > 0">Recommendations: {{ tvShow.numOfRec }}</p>
+                      <p ng-show="tvShow.numOfRec == 0">Not recommended yet</p>
+                      <div ng-show="loggedIn">
+                   <div ng-show="!tvShow.recommendedByUser"> <span class="glyphicon glyphicon-thumbs-up"></span> 
+                             <a href="" class="show-home-link" ng-click="recomend(tvShow)">Recommend</a> </div>
+                    <div ng-show="tvShow.recommendedByUser">  <span class="glyphicon glyphicon-thumbs-down"></span>
+                             <a href="" class="show-home-link" ng-click="unRecomend(tvShow)">Unrecommend</a> </div>
+                      <div ng-show="!tvShow.addedToWatchlist" class="row">
+	                       <button class="btn btn-watchlist"  ng-click="addToWatchlist(tvShow)">
+	                       <i class="glyphicon glyphicon-plus"></i> Add to watchlist</button>  
+                       </div>  
+                       <div ng-show="tvShow.addedToWatchlist" class="row">
+	                       <button class="btn btn-watchlist "  ng-click="removeFromWatchlist(tvShow)">
+	                       <i class="glyphicon glyphicon-minus"></i>Remove from watchlist</button>  
+                       </div>
+                          </div>
+				 </div> 	  
+		   </div>
+		  </div>
+		 </div> 
+		</div>
+		
+</div>
+<div class="row">
+        <div class="col-md-9 col-md-offset-4">
+            <pagination total-items="totalPages" ng-model="currentPage" ng-change="pageChanged()" 
+                   items-per-page="20" max-size="5" boundary-links="true"></pagination>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div ng-show="!result.results[0] && !loading" ng-cloak>
+  <div class="top-brown" style="position: absolute; width: 100%; height: 100%">
+     <div class="container middle-yellow" style=" width: 80%; height: 100%">
+        <h2 class="text-center">No results found</h2>
+     </div> 
+  </div>
+</div>

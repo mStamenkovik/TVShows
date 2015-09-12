@@ -1,0 +1,46 @@
+<!-- <input type="button" ng-click="test()" value="kopce" name="kopce" /> -->
+
+<page-header header-title="{{ 'action.login'  }}" icon="fa-sign-in"></page-header>	
+	<div class="row top-brown">
+	   <div class="container">
+	        <h2 class="show-name georgia">Log in</h2>
+	   </div>
+	</div>
+	<div class="middle-yellow" style="height: 100%; width: 100%">
+	    <div class="container ">
+	     
+	         <form class="center-block top-buffer bottom-buffer" style="width: 50%">
+	          <h4 class="show-name text-center" ng-show="badCredentials">Username and password don't match</h4>
+	           <div class="form-group">
+				    <label for="username" class="login-fonts show-name">Username</label>
+				    <input type="text" ng-model="username" class="form-control" id="username" placeholder="Username">
+				  </div>
+				  <div class="form-group">
+				    <label for="password" class="login-fonts show-name">Password</label>
+				    <input type="password" ng-model="password" class="form-control" id="password" placeholder="Password">
+			   </div>
+			   <div class="form-group">
+				<div class="col-md-9">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" ng-model="rememberMe"> Remember Me
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-1 col-md-offset-10">
+					<input type="submit" value="Login" class="btn btn-watchlist" ng-click="login()"/>
+				</div>	
+			</div>
+	         </form>
+	    </div>
+	</div>
+	<div style="bottom: 0">
+    <div class="row top-brown" style="height: 30px"> <!-- bottom brown -->    
+          </div>
+      <div class="row" style="height: 20px; background-color: #591E23"> <!-- bottom brown -->    
+          </div>
+          <div class="row top-brown" style="height: 10px; background-color: #D94E67"> <!-- bottom brown -->    
+          </div>
+    </div>

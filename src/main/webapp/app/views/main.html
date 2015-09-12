@@ -1,0 +1,124 @@
+
+<div class="jumbotron jumbo-space" >
+     <div>
+          <div class="row"> <!-- top -->
+            <div class="row top-brown ">  <!--  top brown -->
+              <div class="container">
+	                <div class="col-md-4">
+	                  <h3 class="most-popular-airing">Most Popular Airing Today</h3>
+	               </div>
+	               <div class="col-md-4 show-name">
+	                 <h2 class="georgia">{{ show.name }}</h2>
+	               </div>
+	               <div class="col-md-4">
+	                  <a class="show-home-link show-home-link-pos" target="_blank" href="{{ show.homepage }}">
+	                        <h4>{{ show.name }}'s</h4><h4> Homepage</h4>
+	                   </a>
+	               </div>
+              </div>
+          </div>  <!-- end top brown -->
+          <div class="row middle-yellow">  <!-- middle yellow -->
+             <div class="container">
+                  <div class="col-md-6">
+                   <a href="#/tvshow/{{ show.id }}">
+                     <img ng-src="http://image.tmdb.org/t/p/w500{{ show.poster_path }}" alt="{{ show.name }}"
+                            class="img-responsive thumbnail" style="margin-bottom: 0px; max-width: 80%">
+                            </a>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="row">
+                          <p class="overview-text">{{ show.overview }}</p>
+                    </div>
+                    <div class="row">             
+			            <div class="col-md-3">
+			                           <h4 class="show-name">Genres:</h4>
+			            <div class="text-color-dark" ng-repeat="genre in show.genres">{{ genre.name }}</div>
+			            </div>			            
+			            <div class="col-md-3">
+			                           <h4 class="show-name">Production:</h4>
+			            <div class="text-color-dark" ng-repeat="prod in show.production_companies">{{ prod.name }}</div>
+			            </div>			            
+			            <div class="col-md-3">
+			                           <h4 class="show-name">Networks:</h4>
+			            <div class="text-color-dark" ng-repeat="network in show.networks">{{ network.name }}</div>
+			            </div>			            
+			            <div class="col-md-3">
+			                          <!--  <h4 class="fontColorMain">Genres:</h4>
+			            <div class="fontColorText" ng-repeat="genre in show.genres">{{ genre.name }} -->
+			            </div>                 
+                    </div>
+                    
+         
+                    <div class="row top-buffer">
+                          <div class="col-md-4">
+                             <div class="row">
+                                 <h4 class="show-name">Rating</h4>
+                             </div>
+              <!-- /////////////    stars for rating;; write js -->              
+                             <div class="row"> 
+                                 <img style="margin-top: 17px" src="images/rating-stars-dark.png" alt="rating-stars" 
+                                    class="img-responsive">
+                             </div>
+                            
+                             <div class="row">
+                                 <span class="text-color-dark" ng-show="numOfRec > 0">Recomended by: {{ numOfRec }}</span><br>
+                                 <span class="text-color-dark">{{ show.vote_average }} from {{ show.vote_count}} users</span>
+                             </div>
+                          </div>
+                          <div class="col-md-4">
+                              <h4 class="show-name">Runtime</h4>
+                              <div class="row vcenter">
+                                  <img src="images/clock3.png" alt="runtime" class="img-responsive" style="display: inline">
+                                  <span class="text-color-dark">{{ show.episode_run_time }} mins</span>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <h4 class="show-name">Seasons</h4>
+                              <div class="row">
+                                  <img src="images/clapper1.png" alt="seasons" class="img-responsive" style="display: inline">
+                                  <span class="text-color-dark">{{ show.number_of_seasons }}</span>
+                              </div>
+                          </div>
+                    </div>
+                  </div> <!-- end overview col -->
+             </div>
+          </div> <!-- middle yellow -->
+          <div class="row bottom-brown top-brown"> <!-- bottom brown -->
+            
+          </div> <!-- end bottom brown -->
+          </div> <!--  end top -->
+     </div>       
+    </div> <!-- end Jumbotron of mainshow -->
+</div>
+
+<div class="row middle-yellow">
+<div class="container">
+<div class="row">
+    <div class="col-md-12 ">
+        <div class="row show-name text-center">
+            <h1 style="font-family: Bookman Old Style; margin-bottom: 30px">Shows Airing Today</h1>
+        </div>
+
+        <div class="block">
+            <div ng-repeat="tvShow in result.results | limitTo: 7" ng-show="$index != 0">
+                <div class="col-md-4 text-center" style="overflow: auto">
+                    <div>
+                        <a href="#/tvshow/{{ tvShow.id }}"><img ng-src="http://image.tmdb.org/t/p/w500{{ tvShow.poster_path }}" 
+                            alt="{{ tvShow.original_name }}" class="img-responsive thumbnail" 
+                              style="width: 220px; height: 325px; display: inline">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+    
+    </div>
+
+<div class="jumbotron top-brown" style="margin-bottom: 0px">
+    <div class="container text-center">
+        <h4 class="show-name">Thanks to <a class="show-home-link" href="https://www.themoviedb.org/" target="_blank">themoviedb.org</a></h4>
+    </div>
+</div>

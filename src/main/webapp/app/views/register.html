@@ -1,0 +1,67 @@
+<div class="row top-brown">
+	   <div class="container">
+	        <h2 class="show-name georgia">Register</h2>
+	   </div>
+	</div>
+<div class="row middle-yellow">
+<div class="container">
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3 ">
+		<form role="form" class="top-buffer" style="margin-bottom: 30px" name="registrationForm" novalidate ng-submit="register()">
+			
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6">
+				    <label for="firstname" class="login-fonts show-name">First Name</label>
+					<div class="form-group" ng-class="{'has-error' : registrationForm.firstname.$invalid  && registrationForm.firstname.$dirty}">
+                        <input type="text" name="firstname" ng-model="firstname" id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1" required>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6">
+				<label for="lastname" class="login-fonts show-name">Last Name</label>
+					<div class="form-group"  ng-class="{'has-error' : registrationForm.lastname.$invalid  && registrationForm.lastname.$dirty}">
+						<input type="text" name="lastname" ng-model="lastname" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2" required>
+					</div>
+				</div>
+			</div>
+			<div class="form-group" ng-class="{'has-error' : registrationForm.username.$dirty && registrationForm.username.$invalid}">
+				 <label for="username" class="login-fonts show-name">Username</label>
+				<input type="text" ng-minlength="6" name="username" ng-model="username" id="username" class="form-control input-lg" placeholder="Username" tabindex="3" ng-blur="checkUsername(username)" required>
+                <span class="glyphicon glyphicon-ok" style="font-size: 1.2em; color: #5CB85C" ng-show="!taken && registrationForm.username.$dirty && functionExecuted && registrationForm.username.$valid"></span>
+                <span class="glyphicon glyphicon-remove" style="font-size: 1.2em; color: #D9534F" ng-show="taken && registrationForm.username.$dirty && functionExecuted && registrationForm.username.$valid"></span>
+            </div>
+			<div class="form-group"  ng-class="{'has-error' : registrationForm.email.$invalid  && registrationForm.email.$dirty, 'has-success' : registrationForm.email.$valid && registrationForm.email.$dirty}">
+				<label for="email" class="login-fonts show-name">Email</label>
+				<input type="email" name="email" ng-model="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4" required >
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div class="form-group">
+					<label for="password" class="login-fonts show-name">Password</label>
+						<input type="password" name="password" ng-model="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5" required>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div class="form-group" ng-class="{'has-error' : registrationForm.password.$valid  && registrationForm.passwordConf.$dirty && !samePass, 'has-success' : registrationForm.password.$valid  && registrationForm.passwordConf.$dirty && samePass}">
+						<label for="confpassword" class="login-fonts show-name">Confirm Password</label>
+						<input type="password" name="passwordConf" ng-model="passwordConf" ng-change="passConf()" id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="6" required>
+					</div>
+				</div>
+			</div>
+
+			
+			
+			<div class="row">
+				<div class="col-xs-12 col-md-6"><input type="submit" value="Register"  style="padding: 10px 50px;" 
+				          class="btn btn-watchlist btn-lg" tabindex="7"></div>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+</div>
+<div class="row top-brown" style="height: 30px"> <!-- bottom brown -->    
+          </div>
+      <div class="row" style="height: 20px; background-color: #591E23"> <!-- bottom brown -->    
+          </div>
+          <div class="row top-brown" style="height: 10px; background-color: #D94E67"> <!-- bottom brown -->    
+          </div>

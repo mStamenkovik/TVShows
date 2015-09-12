@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<security:global-method-security
+		secured-annotations="enabled" pre-post-annotations="enabled">
+	</security:global-method-security>
+
+	<security:debug />
+
+	<bean id="userService" class="com.tvshows.security.UserDetailsService"></bean>
+
+	<security:authentication-manager id="authenticationManager">
+		<security:authentication-provider
+			user-service-ref="userService">
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+	<security:http realm="WP protection" use-expressions="true"
+		auto-config="true" authentication-manager-ref="authenticationManager">
+
+		<security:access-denied-handler
+			error-page="/403" />
+	
+	
+	<security:intercept-url pattern="/login"
+        access="permitAll"/>
+	    <security:intercept-url
+	        pattern="/**"
+	        access="hasRole('ROLE_USER')"/>
+		<security:form-login login-page="/Login" 
+			default-target-url="/index"
+			authentication-failure-url="/login?error" 
+			username-parameter="username"
+			password-parameter="password" />
+		<security:remember-me />
+		<security:logout logout-url="/logout" />
+
+		<security:session-management>
+			<security:concurrency-control
+				max-sessions="1" />
+		</security:session-management>
+		
+		
+	
+		
+
+		<!-- <security:port-mappings>
+			<security:port-mapping http="9966" https="9443" />
+		</security:port-mappings> -->
+	</security:http>
+
+
+</beans>
