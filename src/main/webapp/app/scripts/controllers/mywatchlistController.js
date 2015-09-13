@@ -53,12 +53,16 @@ function($scope, getWatchlistService, removeFromWatchlistService, $cookies, $loc
 		
 		$scope.removeFromWatchlist = function(tvShow, index){
 	  
-		$scope.results.splice(index, 1);	
-	  	  removeFromWatchlistService.remove($.param({
-	            
-	            tmdb_id: tvShow.tmdbId
-	            
-	            }));
+		var result = confirm("Are you sure you want to remove '"+ tvShow.title +"' from your wathclist?");
+			if(result){
+				$scope.results.splice(index, 1);	
+			  	  removeFromWatchlistService.remove($.param({
+			            
+			            tmdb_id: tvShow.tmdbId
+			            
+			      }));		
+			}
+		
 	  	  
 	    };
 	
