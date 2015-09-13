@@ -10,14 +10,33 @@ TvShowsApp.config(['$httpProvider', 'settings',
 			$httpProvider.interceptors.push('HRHttpInterceptors');
 		}])
 		
-TvShowsApp.run(['$location', '$rootScope', function($location, $rootScope){
+TvShowsApp.run(['$location', '$rootScope', '$cookies', function($location, $rootScope, $cookies){
 	$rootScope.$on( "$routeChangeStart", function(event, next, current) {
-	      if ($rootScope.loginAction == null || $rootScope.loginAction == false) {
-	        // no logged user, redirect to /login
-	        /*if ( next.templateUrl === "/login.html") {
-	        } else {*/
-	          $location.path("/login");
-	        //}
-	      }
-	    });
+		
+      var checkIfLoggedIn = function(){        
+	        var token = $cookies.get('token');
+	        
+	        if (angular.isDefined(token)){	            
+	            return true;
+	        }
+	        else
+	            return false;
+	    };
+		
+		console.log("next.templateUrl -> " + next.templateUrl);
+		console.log("current.templateUrl -> " + current.templateUrl);
+		console.log("check rootscope: " + $rootScope.isLoggedIn);
+		
+		
+			if(next.templateUrl == 'views/statistics.html' || next.templateUrl == 'views/mywatchlist.html'){
+				  if(!checkIfLoggedIn()){
+				        if ( next.templateUrl === "/login.html") {
+				        } 
+				        else {
+				    	  $location.path("/login");
+				        }	      
+			  }
+			}
+		
+	  });
 }]);

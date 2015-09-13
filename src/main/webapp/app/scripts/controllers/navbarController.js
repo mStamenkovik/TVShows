@@ -1,8 +1,8 @@
 
 
 
-TvShowsApp.controller('navbarController', ['$scope', '$cookies', '$route', '$location', 'tvShowService', '$templateCache',
-  function($scope, $cookies, $route, $location, $templateCache){
+TvShowsApp.controller('navbarController', ['$scope', '$cookies', '$route', '$location', 'tvShowService', '$templateCache', '$rootScope',
+  function($scope, $cookies, $route, $location, $templateCache, $rootScope){
       
       $scope.searchKeyword = function(keyword){
     	 
@@ -37,15 +37,17 @@ TvShowsApp.controller('navbarController', ['$scope', '$cookies', '$route', '$loc
       
       
       $scope.logout = function(){
+    	 console.log("LOoooooooooooOOoooOOoOooOgOut");
+    	 $rootScope.isLoggedIn = false;
         var loc = '/mywatchlist';
         var dest = '/';
         var currentPageTemplate = $route.current.templateUrl;
-        $rootScope.loginAction = false;
+        
         
           if (angular.isDefined($cookies.get('token'))){
-                
+        	  $rootScope.isLoggedIn = false;
               $cookies.remove('token');
-              $templateCache.remove(currentPageTemplate);
+           //   $templateCache.remove(currentPageTemplate);
               $route.reload();
           }
           

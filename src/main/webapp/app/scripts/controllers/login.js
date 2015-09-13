@@ -13,7 +13,8 @@ TvShowsApp.controller('LoginCtrl', [
 		function($scope, $rootScope, $location, $cookieStore, UserService, auth, $window, $resource, localStorageService, $cookies) {
 			$scope.rememberMe = false;
             $scope.badCredentials = false;
-			
+            $rootScope.isLoggedIn = false;
+            
             if (angular.isDefined($cookies.get('token'))){
                 $location.path('/');
             }
@@ -29,6 +30,7 @@ TvShowsApp.controller('LoginCtrl', [
                     console.log("Rezultati od logiranje");
                     console.log(authenticationResult);
 					$rootScope.authToken = authenticationResult.token;
+					$rootScope.isLoggedIn = true;
 					$rootScope.loginAction = true;
                     //$window.sessionStorage.token = authenticationResult.token;
 					if ($rootScope.returnPath
@@ -40,6 +42,7 @@ TvShowsApp.controller('LoginCtrl', [
 					}
 				}, function(res){
 					 if(res.status == 401){
+						 $rootScope.isLoggedIn = false;
 						 $scope.badCredentials = true;
 					 }
 				});
